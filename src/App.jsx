@@ -1,23 +1,18 @@
 import { useState } from 'react';
-import axios from 'axios';
-import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import WelcomeMessage from './WelcomeMessage';
+import { fetchRecipes, fetchRecipeDetails } from './api';
 
 const RecipeApp = () => {
   const [recipes, setRecipes] = useState([]);
   const [query, setQuery] = useState('');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  const fetchRecipes = async () => {
+  const handleFetchRecipes = async () => {
     try {
-      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php`, {
-        params: {
-          s: query
-        }
-      });
-      setRecipes(response.data.meals);
+      const meals = await fetchRecipes(query);
+      setRecipes(meals);
     } catch (error) {
       console.error('Fehler beim Abrufen der Rezepte:', error);
     }
@@ -25,12 +20,8 @@ const RecipeApp = () => {
 
   const handleRecipeClick = async (recipeId) => {
     try {
-      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php`, {
-        params: {
-          i: recipeId
-        }
-      });
-      setSelectedRecipe(response.data.meals[0]);
+      const recipe = await fetchRecipeDetails(recipeId);
+      setSelectedRecipe(recipe);
     } catch (error) {
       console.error('Fehler beim Abrufen der Rezeptdetails:', error);
     }
@@ -45,11 +36,13 @@ const RecipeApp = () => {
       <main>
         <input
           type="text"
+          id="recipe-search"
+          name="recipe-search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Gib ein Rezept in English ein"
         />
-        <button onClick={fetchRecipes}>Suchen</button>
+        <button onClick={handleFetchRecipes}>Suchen</button>
         <ul className="ul-list">
           {recipes && recipes.map(recipe => (
             <li className="li-list" key={recipe.idMeal} onClick={() => handleRecipeClick(recipe.idMeal)}>
@@ -58,18 +51,28 @@ const RecipeApp = () => {
           ))}
         </ul>
         {selectedRecipe && (
-          <div>
-            <h2>{selectedRecipe.strMeal}</h2>
-            <p>{selectedRecipe.strInstructions}</p>
-            <img src={selectedRecipe.strMealThumb} alt={selectedRecipe.strMeal} style={{ maxWidth: '100%' }} />
+          <div className="container">
+            <div className="selected-recipe">
+              <h2>{selectedRecipe.strMeal}</h2>
+              <p>{selectedRecipe.strInstructions}</p>
+              <img src={selectedRecipe.strMealThumb} alt={selectedRecipe.strMeal} />
+            </div>
           </div>
         )}
       </main>
       <footer>
         <p>created by Yousef ®</p>
-        <a href="https://www.instagram.com/youssef0d/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faInstagram} />
-        </a>
+        <div className="social-icons">
+          <a href="https://www.instagram.com/youssef0d/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+          <a href="https://github.com/YoussefDawod" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
+          <a href="https://www.linkedin.com/in/youssef-dawod-203273215/" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+        </div>
       </footer>
     </div>
   );

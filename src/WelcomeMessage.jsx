@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 
 const WelcomeMessage = () => {
-  const [showMessage, setShowMessage] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleClick = () => {
     setShowMessage(false);
   };
 
   useEffect(() => {
-    // Diese Funktion wird ausgeführt, wenn die Komponente geladen wird.
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -22,7 +26,7 @@ const WelcomeMessage = () => {
           werbefreie Nutzung zu ermöglichen. Deshalb genießt du beim Besuch der
           Webseite diese Vorteile:
         </p>
-        <ul>
+        <ul className="welcome-list">
           <li>Keine Anmeldung erforderlich</li>
           <li>Keine Datensammlung</li>
           <li>Und natürlich keine lästige Werbung</li>
@@ -30,11 +34,11 @@ const WelcomeMessage = () => {
         <p>
           Wenn dir die Webseite gefällt und du sie öfter nutzen möchtest, kannst
           du sie einfach auf deinem Bildschirm installieren. So geht's:
-          <ol>
-            <li>Öffne die Chrome-Einstellungen.</li>
-            <li>Wähle "Zum Startbildschirm hinzufügen"</li>
-          </ol>
         </p>
+        <ol className="welcome-list">
+          <li>Öffne die Chrome-Einstellungen.</li>
+          <li>Wähle "Zum Startbildschirm hinzufügen"</li>
+        </ol>
         <p>
           Hast du Ideen oder Vorschläge, wie wir die Webseite noch besser machen
           können? Lass es mich wissen.
