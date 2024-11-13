@@ -1,68 +1,135 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Allgemeine Stile */
+.app {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #e0f7fa;
+  padding-top: 80px; /* Platz für den fixierten Header */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+header {
+  background-color: #00796b; /* Dunkeltürkis */
+  padding: 20px;
+  color: white;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+main {
+  padding: 20px;
+  margin-top: 15%;
+}
+
+input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  font-size: 1.2em;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.3s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button:hover {
+  background-color: #004d40;
+}
+
+.ul-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.li-list {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.li-list:hover {
+  background-color: #f0f0f0;
+}
+
+.selected-recipe {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #00796b;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  padding: 0 10px;
+}
+
+footer img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+@media (max-width: 760px) {
+  header, main footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+/* WelcomeMessage Styles */
+.messageBox {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  background-color: #b2dfdb; /* Helltürkis */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
 }
